@@ -9,7 +9,7 @@ nnUNet was developed by Isensee et al. and further information on the original f
 The nnUNet is a fully automated and generalisable framework which automatically configures the full training pipeline for any 3D medical imaging  segmentation task it is applied on, taking into account dataset properties and hardware constraints.  
 
 The nnUNet utilises a standard UNet type architecture which is self-configuring in terms of both depth and hyperparameters. 
-We extend the original [nnUNet code](https://github.com/MIC-DKFZ/nnUNet) by integrating features found in more advanced UNet variations, namely residual blocks, dense blocks, and inception blocks. 
+We extend the original [nnUNet code](https://github.com/MIC-DKFZ/nnUNet) by integrating three forms of attention, namely single-spatial-attention, multi-spatial-attention, and channel-attention blocks. We thereby propose three novel extensions to the nnUNet architecure, namely Spatial-Solo-Attention-nnUNet, Spatial-Multi-Attention-nnUNet,  and Channel-Spatial-Attention-nnUNet. 
 
 Users can then easily experiment with a range of different UNet architectural variations within the nnUNet framework and may choose the architecture variation which performs optimally depending on the dataset in question. This is evidenced in the following paper:
 
@@ -51,19 +51,19 @@ nnUNet_plan_and_preprocess -t TASK_ID
 
 ##### 2) Run planning for custom model: 
 
-##### Residual UNet:
+##### Spatial-Solo-Attention-nnUNet:
 
 ```bash
 nnUNet_plan_and_preprocess -t TASK_ID -pl3d ExperimentPlanner3DResidualUNet_v21
 ```
 
-##### Inception UNet:
+##### Spatial-Multi-Attention-nnUNet:
 
 ```bash
 nnUNet_plan_and_preprocess -t TASK_ID -pl3d ExperimentPlanner3DInceptionUNet_v21
 ```
 
-##### Dense UNet:
+##### Channel-Spatial-Attention-nnUNet:
 
 ```bash
 nnUNet_plan_and_preprocess -t TASK_ID -pl3d ExperimentPlanner3DDenseUNet_v21
@@ -76,19 +76,19 @@ We here concentrate on training demonstrations using the 3D full-resolution conf
 
 Run the following depending on which architecture one wishes to experiment training with:
 
-##### Residual UNet:
+##### Spatial-Solo-Attention-nnUNet:
 For FOLD in [0, 1, 2, 3, 4], run:
 ```bash
 nnUNet_train 3d_fullres nnUNetTrainerV2_ResidualUNet TASK_NAME_OR_ID FOLD -p nnUNetPlans_ResidualUNet_v2.1
 ```
 
-##### Inception UNet:
+##### Spatial-Multi-Attention-nnUNet:
 For FOLD in [0, 1, 2, 3, 4], run:
 ```bash
 nnUNet_train 3d_fullres nnUNetTrainerV2_InceptionUNet TASK_NAME_OR_ID FOLD -p nnUNetPlans_InceptionUNet_v2.1
 ```
 
-##### Dense UNet:
+##### Channel-Spatial-Attention-nnUNet:
 For FOLD in [0, 1, 2, 3, 4], run:
 ```bash
 nnUNet_train 3d_fullres nnUNetTrainerV2_DenseUNet TASK_NAME_OR_ID FOLD -p nnUNetPlans_DenseUNet_v2.1
@@ -103,19 +103,19 @@ We here concentrate on inference demonstrations using the 3D full-resolution con
 
 Run the following depending on which architecture one wishes to experiment inference with:
 
-##### Residual UNet:
+##### Spatial-Solo-Attention-nnUNet:
 
 ```bash
 nnUNet_predict -i INPUT_FOLDER -o OUTPUT_FOLDER -t TASK_NAME_OR_ID -m 3d_fullres -p nnUNetPlans_ResidualUNet_v2.1 -tr nnUNetTrainerV2_ResidualUNet
 ```
 
-##### Inception UNet:
+##### Spatial-Multi-Attention-nnUNet:
 
 ```bash
 nnUNet_predict -i INPUT_FOLDER -o OUTPUT_FOLDER -t TASK_NAME_OR_ID -m 3d_fullres -p nnUNetPlans_InceptionUNet_v2.1 -tr nnUNetTrainerV2_InceptionUNet
 ```
 
-##### Dense UNet:
+##### Channel-Spatial-Attention-nnUNet:
 
 ```bash
 nnUNet_predict -i INPUT_FOLDER -o OUTPUT_FOLDER -t TASK_NAME_OR_ID -m 3d_fullres -p nnUNetPlans_DenseUNet_v2.1 -tr nnUNetTrainerV2_DenseUNet
